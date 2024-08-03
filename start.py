@@ -1,5 +1,5 @@
 from models.main_models import *
-
+from services.data_manager import save_data, load_data
 
 def parse_input(user_input):
     cmd, *args = user_input.split()
@@ -116,8 +116,8 @@ def get_week_birthdays(book: AddressBook):
 
 
 def main():
-    book = AddressBook()
-
+    book = load_data()
+    print(book)
     print("Welcome to the assistant bot!")
     while True:
         user_input = input("Enter a command: ")
@@ -141,13 +141,14 @@ def main():
             output = add_birthday(args, book)
         elif command == "show-birthday":
             output = show_birthday(args, book)
-        elif command == "bi":
+        elif command == "birthdays":
             output = get_week_birthdays(book)
         else:
             print("Invalid command.")
 
         print(output)
 
+    save_data(book)
 
 if __name__ == "__main__":
     main()

@@ -89,6 +89,12 @@ class AddressBook(UserDict):
 
         self.data[name] = record
 
+    def __getstate__(self):
+        return self.data
+
+    def __setstate__(self, state):
+        self.data = state
+
     def find(self, name) -> Record:
         return self.data.get(name, None)
 
